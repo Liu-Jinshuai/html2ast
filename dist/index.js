@@ -1,15 +1,14 @@
-export { parse };
 // root node
 let ast = {
-}
+};
 let options = {
-}
+};
 function reset() {
     ast = {
         type: 'Program',
         children: [],
         content: '',
-    }
+    };
     options = {
         state: 1,
         currentOpenTag: null,
@@ -23,14 +22,14 @@ function reset() {
             'meta', 'img', 'br', 'hr', 'input', 'link', 'base', 'source',
             'track', 'area', 'col', 'wbr', 'embed', 'param', 'keygen', 'command'
         ])
-    }
+    };
 }
 function parse(input, optiones) {
     reset();
     let len = input.length;
-    options = Object.assign(options, { currentInput: input }, optiones)
+    options = Object.assign(options, { currentInput: input }, optiones);
     while (options.currentIndex < len) {
-        let char = input[options.currentIndex].charCodeAt()
+        let char = input[options.currentIndex].charCodeAt();
         switch (options.state) {
             case 1:
                 stateText(char);
@@ -91,7 +90,7 @@ function stateInCommentLike(char) {
         addNode({
             type: 3,
             content: getSlice(options.sectionStart, options.currentIndex)
-        })
+        });
         options.state = 23;
     }
 }
@@ -173,13 +172,13 @@ function onattribname(start, end) {
         type: 6,
         value: void 0,
         name: getSlice(start, end),
-    }
+    };
 }
 function stateText(char) {
     // <
     if (char === 60) {
         if (options.currentIndex > options.sectionStart) {
-            onText(getSlice(options.sectionStart, options.currentIndex))
+            onText(getSlice(options.sectionStart, options.currentIndex));
         }
         options.sectionStart = options.currentIndex;
         options.state = 5;
@@ -214,7 +213,7 @@ function onText(content) {
         parent.children.push({
             type: 2,
             content,
-        })
+        });
     }
 }
 function stateBeforeTagName(char) {
@@ -230,10 +229,10 @@ function stateBeforeTagName(char) {
         options.state = 6;
     } else if (char === 47) {
         // /
-        options.state = 8
+        options.state = 8;
     } else {
-        options.state = 1
-        stateText(char)
+        options.state = 1;
+        stateText(char);
     }
 }
 function isTagStartChar(c) {
@@ -251,20 +250,20 @@ function isEndOfTagSection(c) {
     return c === 47 || c === 62 || isWhitespace(c);
 }
 function handleTagName(c) {
-    onopentagname(options.sectionStart, options.currentIndex)
+    onopentagname(options.sectionStart, options.currentIndex);
     options.state = 11;
     options.sectionStart = -1;
     stateBeforeAttrName(c);
 }
 function onopentagname(start, end) {
-    let tagName = options.currentInput.slice(start, end)
+    let tagName = options.currentInput.slice(start, end);
     options.currentOpenTag = {
         type: 1,
         tag: tagName,
         props: [],
         children: [],
         content: '',
-    }
+    };
 }
 function stateBeforeAttrName(c) {
     // >
@@ -282,7 +281,7 @@ function stateBeforeAttrName(c) {
         options.state = 7;
     } else if (!isWhitespace(c)) {
         // not whitespace
-        handleAttrStart(c);
+        handleAttrStart();
     }
 }
 function handleAttrStart(char) {
@@ -324,6 +323,8 @@ function onselfclosingtag(char) {
     const name = options.currentOpenTag.tag;
     endOpenTag(char);
     if (options.stack[0] && options.stack[0].tag === name) {
-        onCloseTag(options.stack.shift(), char);
+        onCloseTag(options.stack.shift());
     }
 }
+
+export { parse };
