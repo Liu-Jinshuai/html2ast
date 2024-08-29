@@ -1,5 +1,5 @@
 {
-  "name": "html-to-ast",
+  "name": "html2ast",
   "version": "1.0.0",
   "description": "Convert html to ast",
   "main": "index.js",
