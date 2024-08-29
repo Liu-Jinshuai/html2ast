@@ -1,0 +1,24 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Application settings
+config.json
+
+# Temporary files
+temp/
+*.tmp
+
+# Ignore all .env files
+*.env
+
+# Ignore specific files in a directory but not others
+config/*
+!config/settings.json

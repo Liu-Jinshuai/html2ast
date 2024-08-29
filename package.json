@@ -1,0 +1,28 @@
+{
+  "name": "html-to-ast",
+  "version": "1.0.0",
+  "description": "Convert html to ast",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liu-Jinshuai/html-to-ast.git"
+  },
+  "author": "Liu Jinshuai",
+  "license": "ISC",
+  "keywords": [
+    "html",
+    "ast",
+    "parser",
+    "html-to-ast",
+    "syntax-tree",
+    "html-parser"
+  ],
+  "bugs": {
+    "url": "https://github.com/Liu-Jinshuai/html-to-ast/issues"
+  },
+  "homepage": "https://github.com/Liu-Jinshuai/html-to-ast#readme"
+}
